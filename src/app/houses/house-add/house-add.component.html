@@ -1,0 +1,69 @@
+<div class="matcarddiv">
+  <mat-card class="mat-elevation-z3">
+  <mat-card-header>
+    <mat-card-title>Add New House</mat-card-title>
+    <mat-card-subtitle>A form to add new rental house</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form
+      style="display: flex; flex-direction: column"
+      (ngSubmit)="submitForm(form)"
+      #form="ngForm"
+    >
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          placeholder="Enter  Address of house"
+          type="text"
+          #address="ngModel"
+          [(ngModel)]="house.address"
+          name="address"
+          required
+          minlength="3"
+        />
+      </mat-form-field>
+      <ul style="color: red" *ngIf="address.dirty && address.invalid">
+        <li *ngFor="let item of getValidationMessages(address)">
+          {{ item }}
+        </li>
+      </ul>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter Number of Rooms"
+          type="text"
+          #numberOfRooms="ngModel"
+          [(ngModel)]="house.numberOfRooms"
+          name="numberOfRooms"
+          required
+          pattern="[0-9]+"
+        />
+      </mat-form-field>
+      <ul style="color: red" *ngIf="numberOfRooms.dirty && numberOfRooms.invalid">
+        <li *ngFor="let item of getValidationMessages(numberOfRooms)">
+          {{ item }}
+        </li>
+      </ul>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter Monthly Rent"
+          type="text"
+          #monthlyRent="ngModel"
+          [(ngModel)]="house.monthlyRent"
+          name="monthlyRent"
+          pattern="[0-9]+"
+          required
+        />
+      </mat-form-field>
+      <ul style="color: red" *ngIf="monthlyRent.dirty && monthlyRent.invalid">
+        <li *ngFor="let item of getValidationMessages(monthlyRent)">
+          {{ item }}
+        </li>
+      </ul>
+      <button mat-raised-button color="accent" type="submit">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>

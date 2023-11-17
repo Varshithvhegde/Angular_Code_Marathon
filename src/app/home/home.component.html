@@ -1,0 +1,21 @@
+<div class="container">
+
+    <h1>Welcome to <em>Nice Homes</em></h1>
+    <p>For your new homes you can get the dream house from us ....</p>
+    <p [routerLink]="['/houses']" style="cursor: pointer;" class="checkOut">Check Out >>></p>
+
+    <div class="cardContainer">
+        <mat-card class="mat-elevation-z3" [routerLink]="['/houses']" routerLinkActive="router-link-active" >
+            <mat-card-title>View Houses</mat-card-title>
+            <mat-card-content>
+                Check Out Our newly Added Collections
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="mat-elevation-z3" [routerLink]="['/houses/add']" routerLinkActive="router-link-active" >
+            <mat-card-title>Add New Houses</mat-card-title>
+            <mat-card-content>
+                Add Your Own House for Renting 
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="matcarddiv">
+  <mat-card class="mat-elevation-z3">
+
+  <mat-card-header>
+    <mat-card-title>Edit House</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form
+      style="display: flex; flex-direction: column"
+      [formGroup]="houseForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          placeholder="Enter  Address of house"
+          type="text"
+          formControlName="address"
+          name="address"
+          required
+          minlength="3"
+        />
+        <mat-error
+          *ngIf="this.houseForm.controls['address'].errors?.['required']"
+        >
+          Address is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter Number of Rooms"
+          type="text"
+          formControlName="numberOfRooms"
+          name="numberOfRooms"
+        />
+        <mat-error
+          *ngIf="this.houseForm.controls['numberOfRooms'].errors?.['required']"
+        >
+          Number Of Rooms is required
+        </mat-error>
+        <mat-error
+          *ngIf="this.houseForm.controls['numberOfRooms'].errors?.['pattern']"
+        >
+          Number Of Rooms has illegal character
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter Monthly Rent"
+          type="text"
+          formControlName="monthlyRent"
+          name="monthlyRent"
+          pattern="[0-9]+"
+          required
+        />
+        <mat-error
+          *ngIf="this.houseForm.controls['monthlyRent'].errors?.['required']"
+        >
+          Monthly Rent is required
+        </mat-error>
+        <mat-error
+          *ngIf="this.houseForm.controls['monthlyRent'].errors?.['pattern']"
+        >
+          Monthly Rent has illegal character
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select the Availability</mat-label>
+        <mat-select
+          placeholder="placeholder"
+          required
+          formControlName="isOccupied"
+          name="isOccupied"
+        >
+          <mat-option [value]="true">True</mat-option>
+          <mat-option [value]="false">False</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Update</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>

@@ -1,0 +1,94 @@
+<div class="tableContainer">
+  
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Enter the address for search" [(ngModel)]="search" (ngModelChange)="searchByAddress()">
+    </mat-form-field>
+  </div>
+
+
+  <mat-table [dataSource]="allHouses" class="mat-elevation-z3">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let allHouses"> {{ allHouses.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell *matCellDef="let allHouses">
+        <button
+          mat-button
+          color="secondary"
+          [routerLink]="['/houses', allHouses.id]"
+        >
+          {{ allHouses.address }}
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfRooms">
+      <mat-header-cell *matHeaderCellDef> Number of Rooms </mat-header-cell>
+      <mat-cell *matCellDef="let allHouses">
+        {{ allHouses.numberOfRooms }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="monthlyRent">
+      <mat-header-cell *matHeaderCellDef> Monthly Rent </mat-header-cell>
+      <mat-cell *matCellDef="let allHouses">
+        {{ allHouses.monthlyRent | currency : "INR" }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="isOccupied">
+      <mat-header-cell *matHeaderCellDef> Occupied </mat-header-cell>
+      <mat-cell *matCellDef="let allHouses">
+        {{ allHouses.isOccupied | occupiedStatus }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+      <mat-cell *matCellDef="let allHouses">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="{2:label} icon"
+          [routerLink]="['/houses/edit', allHouses.id]"
+          >edit</mat-icon
+        >
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+      <mat-cell *matCellDef="let allHouses">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="{2:label} icon"
+          (click)="deleteHouse(allHouses.id)"
+          >delete</mat-icon
+        >
+      </mat-cell>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="[
+        'address',
+        'numberOfRooms',
+        'isOccupied',
+        'monthlyRent',
+        'edit',
+        'delete'
+      ]"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'address',
+          'numberOfRooms',
+          'isOccupied',
+          'monthlyRent',
+          'edit',
+          'delete'
+        ]
+      "
+    ></mat-row>
+  </mat-table>
+</div>
